@@ -32,7 +32,7 @@ function qLoader() {
     option3.innerHTML = ansOpt3;
     option4.innerHTML = ansOpt4;
 };
-
+    evalAns();
     window.addEventListener("load", qLoader);
     
 //this function is for comparing anwers
@@ -42,7 +42,8 @@ function evalAns () {
     var bttn = document.querySelector(".button-grp");
 
     bttn.addEventListener("click", function() {
-        bttn.children.innerText = userAns;
+        if (bttn.click() === true) {
+        bttn.children.innerHTML = userAns;};
         correctAns = qList[qCounter][5];
         if (userAns === correctAns) {
             score++;
@@ -51,11 +52,34 @@ function evalAns () {
 
         qCounter++;
     
-    qLoader();
+    
+};
+qLoader();
+
+var minDisplay = document.getElementById("minute");
+var secDisplay = document.getElementById("second");
+var playButton = document.getElementById("play");
+var elapseTime = 0;
+var secLeft = 20;
+var totalSec
+
+
+minDisplay.textContent = "00";
+
+
+function timer(){
+    
+    elapseTime++
+    secDisplay.textContent = (secLeft - elapseTime);
 };
 
-evalAns();
+function startTimer() {
 
+if (secLeft > 0){
+totalSec = setInterval(timer, 1000);}
 
+else clearInterval (totalSec);
 
+};
 
+playButton.addEventListener("click", startTimer);
